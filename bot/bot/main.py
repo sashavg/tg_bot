@@ -2,15 +2,18 @@ from aiogram import Dispatcher, Bot, types
 import logging
 import requests
 import datetime
-from commands.chatterbox import respond_to_dialog
 from aiogram.dispatcher.filters import Text
+
+from bot.bot.commands.chatterbox import respond_to_dialog
 from config import token_weather
 from config import token_bot
 import asyncio
 from transformers import AutoTokenizer, AutoModelForCausalLM
+from bot.bot.commands import start, weather, chatterbox
 
 tokenizer = AutoTokenizer.from_pretrained('/home/anton/Desktop/tg_bot/bot/models/tokenizer_tg')
 model = AutoModelForCausalLM.from_pretrained("/home/anton/Desktop/tg_bot/bot/models/model_for_tg")
+
 bot = Bot(token=token_bot)
 dp = Dispatcher(bot)
 
@@ -81,7 +84,6 @@ async def q_poetry(message: types.Message):
 
 async def main():
     logging.basicConfig(level=logging.DEBUG)
-
     await dp.start_polling(bot)
 
 
